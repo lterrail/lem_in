@@ -6,13 +6,19 @@
 #    By: lucien <lucien@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/06 11:25:50 by lucien            #+#    #+#              #
-#    Updated: 2018/06/15 14:48:14 by lterrail         ###   ########.fr        #
+#    Updated: 2018/06/20 14:17:03 by lucien           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= lem_in
 
-SRC	=	lem_in.c
+SRC	=	main.c			\
+		get_datas.c		\
+		exit_func.c		\
+		utils.c			\
+		process.c		\
+		delete_link.c	\
+		get_next_line.c
 
 OBJ		= $(addprefix ./obj/,$(SRC:.c=.o))
 

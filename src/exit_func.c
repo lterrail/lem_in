@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.c                                           :+:      :+:    :+:   */
+/*   exit_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lterrail <lterrail@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lucien <lucien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/15 14:33:17 by lterrail          #+#    #+#             */
-/*   Updated: 2018/06/16 13:55:04 by lterrail         ###   ########.fr       */
+/*   Created: 2018/06/18 22:32:18 by lucien            #+#    #+#             */
+/*   Updated: 2018/06/20 15:41:10 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void		lem_in(char *str)
+void		exit_func(t_map *m, int error)
 {
-	ft_putstr(str);
-}
-
-int			main(int ac, char **av)
-{
-	if (ac > 2)
-		return (0);
-	lem_in(av[1]);
-	return (0);
+	printf("error = %d\n", error);
+	free(m->start);
+	free(m->end);
+	free(m->links);
+	free(m->soluc);
+	free(m->start_tmp);
+	free(m);
+	if (error)
+		ft_putstr_fd("ERROR\n", 2);
+	exit(error);
 }
