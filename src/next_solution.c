@@ -6,7 +6,7 @@
 /*   By: lucien <lucien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/21 19:52:42 by lucien            #+#    #+#             */
-/*   Updated: 2018/06/23 12:52:12 by lucien           ###   ########.fr       */
+/*   Updated: 2018/06/23 21:08:57 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,7 @@ static void	cpy_soluc_tmp(t_map *m, char *tmp) //copie le last_solution dans sol
 	i = 0;
 	n = ft_int_strstr(m->last_soluc, tmp) + ft_strlen(tmp);
 	if (n - ft_strlen(tmp) == 0)
-	{
-		while (m->start[i])
-		{
-			m->soluc[m->i] = m->start[i];
-			m->i++;
-			i++;
-		}
-		m->soluc[m->i++] = '-';
-		m->soluc[m->i + 1] = '\0';
-	}
+		add_room_in_soluc(m, m->soluc, m->start);
 	else
 	{
 		while (i <= n)
@@ -39,6 +30,16 @@ static void	cpy_soluc_tmp(t_map *m, char *tmp) //copie le last_solution dans sol
 			i++;
 		}
 	}
+}
+
+static void	read_soluc(t_map *m, char *s2, int i)
+{
+	i -= 2;
+	while (i > 0 && s2[i] != '\n')
+		i--;
+	if (i != 0)
+		i += 1;
+	ft_strcpy_char(m->last_soluc, &s2[i], 'L', '\n');
 }
 
 static char	*get_next_room(t_map *m, char *tmp) //change la room pour la suivante
@@ -54,7 +55,7 @@ static char	*get_next_room(t_map *m, char *tmp) //change la room pour la suivant
 		if (m->last_soluc[i] == '\0') //si on a parcouru tout last_solu sans trouver de lien entre target et soluc alors tu vas à la soluc d'avant
 		{
 			i = ft_strlen(m->soluc) - ft_strlen(m->last_soluc) - 1;
-			save_last_soluc(m, m->soluc, i);
+			read_soluc(m, m->soluc, i);
 			i = 0;
 			j = 0;
 		}
@@ -66,47 +67,24 @@ static char	*get_next_room(t_map *m, char *tmp) //change la room pour la suivant
 	return (tmp);
 }
 
-void		next_solution(t_map *m) //fonction qui cherche par où l'on va commencer la prochaine solution
+void		next_solution(t_map *m)
 {
 	char	*tmp;
 	int		check;
 
 	check = 0;
 	tmp = ft_strnew(m->len);
-	tmp = ft_strcpy(tmp, m->start); //tmp correspond a la valeur qu'on cherche apres avoir changer de solution
+	tmp = ft_strcpy(tmp, m->start);
 	while (check != 1)
 	{
-		if (ft_strstr_char(m->links, tmp)) //si start est dans link alors tu commences direct
+		if (ft_strstr_char(m->links, tmp))
 		{
-			cpy_soluc_tmp(m, tmp);  //si c'est le cas tu copies la soluc -1 n dans soluc
-			ft_strcpy(m->next_room, tmp); //next target
+			cpy_soluc_tmp(m, tmp);
+			ft_strcpy(m->next_room, tmp);
 			check = 1;
 		}
 		else
-			tmp = get_next_room(m, tmp); //c'est ici que tu avances dans soluc -1
+			tmp = get_next_room(m, tmp);
 	}
 	ft_strdel(&tmp);
-}
-
-void		save_last_soluc(t_map *m, char *s2, int i)
-{
-	int		j;
-
-	j = 0;
-	i -= 2;
-	while (i > 0 && s2[i] != '\n') //je recule jusqu'à arriver au début de la précedente solution
-	{
-		i--;
-	}
-	if (i != 0)
-		i += 1;
-	while (s2[i] != '\n')
-	{
-		m->last_soluc[j] = s2[i]; //je copie la derniere solution
-		j++;
-		i++;
-	}
-	m->last_soluc[j] = '\0';  //je fais propre
-	printf("toto\n");
-	printf("m->last_soluc %s\n", m->last_soluc);
 }

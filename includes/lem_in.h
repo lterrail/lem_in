@@ -6,7 +6,7 @@
 /*   By: lterrail <lterrail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 14:29:36 by lterrail          #+#    #+#             */
-/*   Updated: 2018/06/23 15:08:51 by lucien           ###   ########.fr       */
+/*   Updated: 2018/06/23 22:36:02 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ typedef struct		s_data
 	struct s_data	*next;
 }					t_data;
 
-char				*actual_soluc(t_map *m);
-int					save_best_path(t_map *m);
+int					save_best_path(t_map *m, int ret);
 
 /*
 **read_map
@@ -78,21 +77,18 @@ void				process(t_map *m);
 */
 void				check_loop(t_map *m);
 void				rollback_soluc(t_map *m);
-void				remove_last_solution(t_map *m);
 
 /*
 **process - next_solution
 */
 
-void				save_last_soluc(t_map *m, char *s2, int i);
 void				next_solution(t_map *m);
 
 /*
 **process - delete links
 */
 
-void				delete_link(t_map *m, char *s2);
-void				set_new_room(t_map *m);
+void				delete_link(t_map *m, char *room);
 
 /*
 **libft modified
@@ -106,11 +102,31 @@ char				*ft_strcat_char(t_map *m, char *dest, char *src, char c);
 char				*ft_strstr_char(char *big, char *little);
 
 /*
+**utils lem_in
+*/
+
+char				*cpy_one_room(char *s1, char *s2);
+void				add_room_in_soluc(t_map *m, char *soluc, char *s2);
+char				*cpy_last_soluc_room(t_map *m, char *dst, char *src, char c);
+int					remove_last_room(t_map *m);
+void				remove_last_solution(t_map *m);
+
+/*
+**utils lem_in2
+*/
+
+int					count_char(char *str, char c);
+char				*save_soluc(t_map *m, int nb);
+void				delete_soluc(t_map *m, char *n_soluc, char *room);
+void				add_end_soluc(t_map *m, char *n_soluc, char *room);
+
+/*
 **utils
 */
 
 void				exit_func(t_map *m, int error);
 int					get_next_line(const int fd, char **line);
+void				print_data(t_map *m);
 
 /*
 **check_errors
