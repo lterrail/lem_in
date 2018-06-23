@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_datas.c                                        :+:      :+:    :+:   */
+/*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucien <lucien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/18 22:06:26 by lucien            #+#    #+#             */
-/*   Updated: 2018/06/20 17:58:02 by lucien           ###   ########.fr       */
+/*   Updated: 2018/06/22 18:49:23 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int			read_map(t_map *m)
 		{
 			get_next_line(STDIN_FILENO, &line);
 			m->start = ft_strdup_char(line, ' ');
-			printf("m->start %s", m->start);
 			m->count++;
 		}
 		else if (ft_strcmp("##end", line) == 0 && m->end == NULL)
@@ -36,7 +35,7 @@ int			read_map(t_map *m)
 			m->end = ft_strdup_char(line, ' ');
 			m->count++;
 		}
-		else if (ft_strchr(line, '-'))
+		else if (ft_strchr(line, '-') && line[0] != '#')
 			links(m, line);
 	}
 	return (m->count);
@@ -60,9 +59,24 @@ void		count_ants(t_map *m, char *line)
 		exit_func(m, ANTS_ERROR);
 }
 
+char		*str_join(t_map *m, char *s1, char *s2)
+{
+	char	*new;
+
+	check_double(m, s2);
+	if (s1 == NULL)
+		return (s2);
+	new = ft_strnew(ft_strlen(s1) + ft_strlen(s2) + 1);
+	ft_strcat(new, s1);
+	ft_strcat(new, "\n");
+	ft_strcat(new, s2);
+	ft_strdel(&s1);
+	return (new);
+}
+
 void		links(t_map *m, char *line)
 {
 	if (m->links == NULL)
 		m->count++;
-	m->links = str_join(m->links, line);
+	m->links = str_join(m, m->links, line);
 }

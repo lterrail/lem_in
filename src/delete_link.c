@@ -6,48 +6,49 @@
 /*   By: lucien <lucien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 14:15:56 by lucien            #+#    #+#             */
-/*   Updated: 2018/06/20 17:52:53 by lucien           ###   ########.fr       */
+/*   Updated: 2018/06/23 13:26:20 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void		set_new_target(t_map *m, char *s1, char *s2)
+void		set_new_room(t_map *m)
 {
 	char	*tmp;
 	int		i;
 
 	i = 0;
-	tmp = ft_strstr(s1, s2);
+	tmp = ft_strstr_char(m->links, m->next_room);
 	while (tmp[i] && tmp[i] != '\n')
 	{
 		if (tmp[i] == '-')
 			break ;
-		m->start_tmp[i] = tmp[i];
+		m->next_room[i] = tmp[i];
 		i++;
 	}
-	m->start_tmp[i] = '\0';
+	m->next_room[i] = '\0';
 }
 
-void		delete_link(t_map *m, char *s1, char *s2)
+void		delete_link(t_map *m, char *s2)
 {
 	int		i_clear;
 	int		i_next;
 
-	i_clear = ft_int_strstr(s1, s2);
-	set_new_target(m, s1, s2);
+	i_clear = ft_int_strstr(m->links, s2);
+	if (m->loop == 0)
+		set_new_room(m);
 	i_next = i_clear;
-	while (s1[i_next] && s1[i_next] != '\n')
+	while (m->links[i_next] && m->links[i_next] != '\n')
 		i_next++;
-	if (s1[i_next] == '\0')
+	if (m->links[i_next] == '\0')
 	{
 		m->links[i_clear] = '\0';
 		return ;
 	}
 	i_next += 1;
-	while (s1[i_next])
+	while (m->links[i_next])
 	{
-		m->links[i_clear] = s1[i_next];
+		m->links[i_clear] = m->links[i_next];
 		i_clear++;
 		i_next++;
 	}

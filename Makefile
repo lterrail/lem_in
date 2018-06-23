@@ -6,18 +6,22 @@
 #    By: lucien <lucien@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/06 11:25:50 by lucien            #+#    #+#              #
-#    Updated: 2018/06/20 14:17:03 by lucien           ###   ########.fr        #
+#    Updated: 2018/06/22 16:35:58 by lucien           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= lem_in
 
 SRC	=	main.c			\
-		get_datas.c		\
+		read_map.c		\
 		exit_func.c		\
 		utils.c			\
 		process.c		\
 		delete_link.c	\
+		check_errors.c	\
+		next_solution.c	\
+		if_loop.c		\
+		save_best_path.c\
 		get_next_line.c
 
 OBJ		= $(addprefix ./obj/,$(SRC:.c=.o))

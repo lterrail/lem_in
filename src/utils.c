@@ -6,13 +6,13 @@
 /*   By: lucien <lucien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 00:15:22 by lucien            #+#    #+#             */
-/*   Updated: 2018/06/20 17:26:41 by lucien           ###   ########.fr       */
+/*   Updated: 2018/06/23 12:07:14 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int			ft_int_strstr(const char *big, const char *little)
+int			ft_int_strstr(char *big, char *little)
 {
 	int		i;
 	int		j;
@@ -25,9 +25,11 @@ int			ft_int_strstr(const char *big, const char *little)
 		j = 0;
 		while (big[i + j] == little[j] || little[j] == '\0')
 		{
-			if (little[j] == '\0' && big[i + j] == '-')
+			if (little[j] == '\0' && big[i + j] == '-' &&
+			(ft_strlen(little) == ft_strlen_char(&big[i], '-')))
 				return (i);
-			else if (little[j] == '\0' && big[i - 1] == '-')
+			else if (little[j] == '\0' && big[i - 1] == '-' &&
+			(ft_strlen(little) == ft_strlen_char(&big[i], '\n')))
 			{
 				while (big[i] && big[i] != '\n')
 					i--;
@@ -40,9 +42,9 @@ int			ft_int_strstr(const char *big, const char *little)
 	return (0);
 }
 
-int			ft_strlen_char(char *str, char c)
+size_t			ft_strlen_char(char *str, char c)
 {
-	int		i;
+	size_t	i;
 
 	i = 0;
 	while (str[i] && str[i] != c)
@@ -71,16 +73,80 @@ char		*ft_strdup_char(const char *str, char c)
 	return (cpy);
 }
 
-char		*str_join(char *s1, char *s2)
+char	*ft_strcpy_char(char *dest, char *src, char c, char d)
 {
-	char	*new;
+	int 	i;
+	int		j;
 
-	if (s1 == NULL)
-		return (s2);
-	new = ft_strnew(ft_strlen(s1) + ft_strlen(s2) + 1);
-	ft_strcat(new, s1);
-	ft_strcat(new, "\n");
-	ft_strcat(new, s2);
-	ft_strdel(&s1);
-	return (new);
+	i = 0;
+	j = 0;
+	if (c == 'L')
+		(void)c;
+	else
+	{
+		while (src[i] != c)
+			i++;
+		i += 1;
+	}
+	while (src[i])
+	{
+		if (src[i] == d)
+			break ;
+		dest[j] = src[i];
+		i++;
+		j++;
+	}
+	dest[j] = '\0';
+	return (dest);
+}
+
+char	*ft_strcat_char(t_map *m, char *dest, char *src, char c)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (dest[i])
+		i++;
+	while (src[j])
+	{
+		if (src[j] == c)
+			break ;
+		dest[i] = src[j];
+		i++;
+		j++;
+		m->i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+char	*ft_strstr_char(char *big, char *little)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	if (ft_strcmp(little, "") == 0)
+		return ((char*)big);
+	while (big[++i])
+	{
+		j = 0;
+		while (big[i + j] == little[j] || little[j] == '\0')
+		{
+			if (little[j] == '\0' && big[i + j] == '-' &&
+			(ft_strlen(little) == ft_strlen_char(&big[i], '-')))
+				return ((char*)&big[i + j + 1]);
+			else if (little[j] == '\0' && big[i - 1] == '-' &&
+			(ft_strlen(little) == ft_strlen_char(&big[i], '\n')))
+			{
+				while (big[i] && big[i] != '\n')
+					i--;
+				return ((char *)&big[i + 1]);
+			}
+			j++;
+		}
+	}
+	return (NULL);
 }
