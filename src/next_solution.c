@@ -6,7 +6,7 @@
 /*   By: lucien <lucien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/21 19:52:42 by lucien            #+#    #+#             */
-/*   Updated: 2018/06/23 21:08:57 by lucien           ###   ########.fr       */
+/*   Updated: 2018/06/24 00:01:18 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,12 @@ void		next_solution(t_map *m)
 	check = 0;
 	tmp = ft_strnew(m->len);
 	tmp = ft_strcpy(tmp, m->start);
+	if (!(ft_strstr(m->links, m->start)) && (ft_strlen(m->last_soluc) -
+	(ft_strlen(m->start) + ft_strlen(m->end) + 1) == 0))
+	{
+		print_data(m);
+		exit_func(m, 0);
+	}
 	while (check != 1)
 	{
 		if (ft_strstr_char(m->links, tmp))

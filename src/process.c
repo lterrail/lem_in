@@ -6,7 +6,7 @@
 /*   By: lucien <lucien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 12:01:09 by lucien            #+#    #+#             */
-/*   Updated: 2018/06/23 23:19:20 by lucien           ###   ########.fr       */
+/*   Updated: 2018/06/24 22:06:12 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void		process(t_map *m)
 		{
 			if (!(ft_strstr_char(m->links, m->next_room)))
 			{
-				if (save_best_path(m, 0) == -1)
+				if (save_best_path(m, 0, 0) == -1)
 				{
 					m->soluc[m->i + 1] = '\0';
 					m->soluc[m->i] = '\n';
@@ -60,9 +60,9 @@ void		process(t_map *m)
 			}
 			complete_soluc(m);
 			delete_link(m, m->next_room);
-			printf("\n---------------------------------\n\n");
-			printf("solution en cours \n%s\n", m->soluc);
-			printf("\nm->links \n%s\n", m->links);
+			// printf("\n---------------------------------\n\n");
+			// printf("solution en cours \n%s\n", m->soluc);
+			// printf("\nm->links \n%s\n", m->links);
 		}
 		m->soluc[--m->i] = '\n';
 		m->last_soluc = save_soluc(m, -1);

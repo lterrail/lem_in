@@ -6,7 +6,7 @@
 /*   By: lucien <lucien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 16:26:15 by lucien            #+#    #+#             */
-/*   Updated: 2018/06/23 21:46:24 by lucien           ###   ########.fr       */
+/*   Updated: 2018/06/24 19:43:41 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,12 @@ static int	rollback_and_free(t_map *m, char *n_soluc, char *room)
 	return (0);
 }
 
-int			save_best_path(t_map *m, int ret)
+int			save_best_path(t_map *m, int ret, int nb)
 {
 	char	*room;
 	char	*n_soluc;
-	int		nb;
 	int		nb_max;
 
-	nb = 0;
 	room = ft_strnew(m->len);
 	room = cpy_last_soluc_room(m, room, m->soluc, '-');
 	n_soluc = save_soluc(m, nb);
@@ -82,9 +80,11 @@ int			save_best_path(t_map *m, int ret)
 	while (nb != nb_max)
 	{
 		n_soluc = save_soluc(m, nb);
-		if (ft_int_strstr(n_soluc, room) && (ft_int_strstr(n_soluc, room) <= ft_int_strstr(save_soluc(m, -1), room)))
+		if (ft_int_strstr(n_soluc, room) && (ft_int_strstr(n_soluc, room) <=
+		ft_int_strstr(save_soluc(m, -1), room)))
 			ret = worse_path(m, n_soluc, room);
-		else if (ft_int_strstr(n_soluc, room) && (ft_int_strstr(n_soluc, room) > ft_int_strstr(save_soluc(m, -1), room)))
+		else if (ft_int_strstr(n_soluc, room) && (ft_int_strstr(n_soluc, room) >
+		ft_int_strstr(save_soluc(m, -1), room)))
 			ret = better_path(m, n_soluc, room);
 		else if (nb == nb_max - 1)
 			ret = rollback_and_free(m, n_soluc, room);

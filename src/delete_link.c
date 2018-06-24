@@ -6,7 +6,7 @@
 /*   By: lucien <lucien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 14:15:56 by lucien            #+#    #+#             */
-/*   Updated: 2018/06/23 23:14:48 by lucien           ###   ########.fr       */
+/*   Updated: 2018/06/23 23:38:06 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,6 @@ void		delete_link(t_map *m, char *room)
 	len = ft_strlen_char(room, '-');
 	room[len] = '\0';
 	i_clear = ft_int_strstr(m->links, room);
-	if (m->loop == 1)
-	{
-	printf("\n room %s\n", room);
-		printf("\n &m->links[i_clear] %s\n", &m->links[i_clear]);
-	}
 	if (m->loop == 0)
 		cpy_one_room(m->next_room, ft_strstr_char(m->links, m->next_room));
 	i_next = i_clear;
