@@ -6,7 +6,7 @@
 /*   By: lterrail <lterrail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 14:33:17 by lterrail          #+#    #+#             */
-/*   Updated: 2018/06/24 22:00:21 by lucien           ###   ########.fr       */
+/*   Updated: 2018/06/24 23:02:56 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ int				main(void)
 	if (read_map(m) != 4)
 		exit_func(m, READ_MAP_ERROR);
 	check_start_end(m);
-	process(m);
+	process_parsing(m);
 	print_data(m);
-	sort_solution(m);
+	process_ants(m);
 	exit_func(m, 0);
 	return (0);
 }

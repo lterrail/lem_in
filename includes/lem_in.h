@@ -6,7 +6,7 @@
 /*   By: lterrail <lterrail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 14:29:36 by lterrail          #+#    #+#             */
-/*   Updated: 2018/06/24 12:12:54 by lucien           ###   ########.fr       */
+/*   Updated: 2018/06/25 17:00:36 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct		s_data
 }					t_data;
 
 int					save_best_path(t_map *m, int ret, int nb);
+void			print_ants(t_map *m, char **soluc, int nb);
 
 /*
 **read_map
@@ -70,7 +71,7 @@ char				*str_join(t_map *m, char *s1, char *s2);
 **process
 */
 
-void				process(t_map *m);
+void				process_parsing(t_map *m);
 
 /*
 **process - if_loop
@@ -94,7 +95,7 @@ void				delete_link(t_map *m, char *room);
 **sort_and_print_ants
 */
 
-void				sort_solution(t_map *m);
+void				process_ants(t_map *m);
 
 /*
 **libft modified

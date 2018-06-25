@@ -6,7 +6,7 @@
 #    By: lucien <lucien@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/06 11:25:50 by lucien            #+#    #+#              #
-#    Updated: 2018/06/24 12:04:50 by lucien           ###   ########.fr        #
+#    Updated: 2018/06/25 17:24:28 by lucien           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC	=	main.c				\
 		save_best_path.c	\
 		utils_lem_in.c		\
 		utils_lem_in2.c		\
+		clear_solucs.c		\
 		print_ants.c		\
 		get_next_line.c
 

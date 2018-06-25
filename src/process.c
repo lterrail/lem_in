@@ -6,7 +6,7 @@
 /*   By: lucien <lucien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 12:01:09 by lucien            #+#    #+#             */
-/*   Updated: 2018/06/24 22:06:12 by lucien           ###   ########.fr       */
+/*   Updated: 2018/06/24 23:03:05 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	complete_soluc(t_map *m)
 	ft_strdel(&new);
 }
 
-void		process(t_map *m)
+void		process_parsing(t_map *m)
 {
 	init_process(m);
 	while (ft_strlen(m->links) != 0)

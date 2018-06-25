@@ -5,133 +5,168 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucien <lucien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/24 12:04:34 by lucien            #+#    #+#             */
-/*   Updated: 2018/06/24 22:31:17 by lucien           ###   ########.fr       */
+/*   Created: 2018/06/25 16:59:02 by lucien            #+#    #+#             */
+/*   Updated: 2018/06/25 18:02:20 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static int	len(t_map *m, char *soluc)
+static int		*init_tab_ants(int nb, char **soluc)
 {
+	int		*tab_ants;
 	int		i;
+	int		len;
 
-	i = m->i;
-	while (soluc[i])
+	i = 0;
+	len = count_char(soluc[i], '-');
+	nb = len * nb;
+	if (!(tab_ants = malloc(sizeof(int) * nb + 1)))
+		return (NULL);
+	while (nb > i)
 	{
-		if (soluc[i] == '-')
-			return (0);
+		tab_ants[i] = i + 1;
 		i++;
 	}
-	return (i);
+	i = 0;
+	while (i < nb)
+	{
+		printf("tab_ants[test] %d\n", tab_ants[i]);
+		i++;
+	}
+	return (tab_ants);
 }
 
-static char		*read_room(t_map *m, char *room, char *soluc)
+static char		*read_ants(char *room, char *soluc, int turn)
 {
-	if (soluc[m->i + len(m, soluc)] == '\0')
+	int		len;
+	int		i;
+	int		rang;
+
+	i = ft_strlen_char(soluc, '-') + 1; //commence a n + 1
+	len = count_char(&soluc[i], '-') + 1; //compte le nombre de soluc n + 1
+	rang = turn % len; //modulo le tour par le nb de soluc pour trouver à quel rang je suis
+	while (rang != 0) //calcul le i du rnag où je suis puis le print
 	{
-		printf("toto\n");
-		m->i = ft_strlen(m->start) + 1;
-		room = ft_strcpy(room, m->start);
-		return (NULL);
+		while (soluc[i] != '-')
+			i++;
+		i++;
+		rang--;
 	}
-	printf("&soluc[m->i] %s\n", &soluc[m->i]);
-	ft_strcpy_char(room, &soluc[m->i], 'L', '-');
-	printf("room %s\n", room);
-	m->i += ft_strlen(room) + 1;
+	room = ft_strcpy_char(room, &soluc[i], 'L', '-');
 	return (room);
 }
 
-static int		remove_useless_path(t_map *m, char **soluc, int nb_max)
+static int		idk(t_map *m, int *tab_ants, char *room, char **soluc, int turn, int nb, int j, int ants)
+{
+	printf("L%d-", tab_ants[j]);
+	printf("%s ", read_ants(room, soluc[0 + 0], turn));
+	if (ft_strstr(room, m->end))
+	{
+		tab_ants[j] += nb + 1;
+		ants++;
+	}
+	return (ants);
+}
+
+void		print_ants(t_map *m, char **soluc, int nb)
 {
 	int		j;
-	int		i;
 	char	*room;
-	char	*tmp;
-	int		supr;
+	int		turn;
+	int		ants;
+	int		*tab_ants;
 
-	supr = nb_max;
+	tab_ants = init_tab_ants(nb, soluc);
+	ants = nb;
+	printf("nb %d\n", nb);
+	turn = 0;
 	room = ft_strnew(m->len);
-	tmp = ft_strnew(m->len);
 	j = 0;
-	m->i = ft_strlen(m->start) + 1;
-	room = ft_strcpy(room, m->start);
-	while (nb_max >= 2 && j + 1 <= nb_max)
+	while (ants <= m->ants)
 	{
-		i = j + 1;
-		while (nb_max >= 2 && i <= nb_max)
+		j = 0;
+		while (j < nb)
 		{
-			printf("i %d\n", i);
-			printf("nb_max %d\n", nb_max);
-			while (read_room(m, room, soluc[j]) != NULL)
-			{
-				if (ft_int_strstr(soluc[i], room) && ft_strlen(soluc[j]) >= ft_strlen(soluc[i]))
-				{
-					printf("ici\n");
-					ft_strcpy(tmp, soluc[j]);
-					ft_strcpy(soluc[j], soluc[nb_max - 1]);
-					ft_strcpy(soluc[nb_max - 1], tmp);
-					supr--;
-					break ;
-				}
-				else if (ft_int_strstr(soluc[i], room) && ft_strlen(soluc[j]) < ft_strlen(soluc[i]))
-				{
-					printf("la\n");
-					ft_strcpy(tmp, soluc[i]);
-					ft_strcpy(soluc[i], soluc[nb_max - 1]);
-					ft_strcpy(soluc[nb_max - 1], tmp);
-					supr--;
-					break ;
-				}
-			}
-			if (supr == nb_max)
-			{
-				printf("i++\n");
-				i++;
-			}
-			else
-				nb_max = supr;
+			ants = idk(m, tab_ants, room, soluc, turn - j, nb, j, ants);
+			if (ft_strcmp(room, "1") != 0 && nb < 4)
+				nb++;
+			j++;
+			printf("\n");
 		}
-		printf("j++\n");
-		j++;
+		//printf("TU BRANLES QUOI \n");
+		printf("\n");
+		turn++;
 	}
 	ft_strdel(&room);
-	printf("adieu\n");
-	ft_strdel(&tmp);
-	return (nb_max);
 }
 
-void			sort_solution(t_map *m)
-{
-	int		nb_max;
-	char	**soluc;
-	int		ret;
-	int		test;
-	int		i;
 
-	test = 0;
-	i = 0;
-	ret = 0;
-	nb_max = count_char(m->soluc, '\n') - 1;
-	soluc = ft_strsplit(m->soluc, '\n');
-	if (nb_max == 1)
-		return ;
-	ret = remove_useless_path(m, soluc, nb_max);
-	printf("ret %d\n", ret);
-	while (ret != nb_max)
-	{
-		ft_strdel(&soluc[ret]);
-		ret++;
-	}
-	while (test != nb_max)
-	{
-		printf("soluc[%d]%s\n", test, soluc[test]);
-		test++;
-	}
-	while (soluc[i])
-	{
-		ft_strdel(&soluc[i]);
-		i++;
-	}
-	free(soluc);
-}
+
+
+
+
+// static int		*init_tab_ants(int nb, char **soluc)
+// {
+// 	int		*tab_ants;
+// 	int		i;
+// 	int		len;
+//
+// 	i = 0;
+// 	len = count_char(soluc[i], '-');
+// 	nb = len * nb;
+// 	if (!(tab_ants = malloc(sizeof(int) * nb + 1)))
+// 		return (NULL);
+// 	while (nb >= i)
+// 	{
+// 		tab_ants[i] = i + 1;
+// 		i++;
+// 	}
+// 	i = 0;
+// 	while (i <= nb)
+// 	{
+// 		printf("tab_ants[test] %d\n", tab_ants[i]);
+// 		i++;
+// 	}
+// 	return (tab_ants);
+// }
+//
+// static char		*read_ants(char *room, char *soluc, int turn)
+// {
+// 	int		len;
+// 	int		i;
+// 	int		rang;
+//
+// 	i = ft_strlen_char(soluc, '-') + 1; //commence a n + 1
+// 	len = count_char(&soluc[i], '-') + 1; //compte le nombre de soluc n + 1
+// 	rang = turn % len; //modulo le tour par le nb de soluc pour trouver à quel rang je suis
+// 	while (rang != 0) //calcul le i du rnag où je suis puis le print
+// 	{
+// 		while (soluc[i] != '-')
+// 			i++;
+// 		i++;
+// 		rang--;
+// 	}
+// 	room = ft_strcpy_char(room, &soluc[i], 'L', '-');
+// 	return (room);
+// }
+//
+// void			print_ants(t_map *m, char **soluc, int nb)
+// {
+// 	char	*room;
+// 	int		ants;
+// 	int		*tab_ants;
+//
+// 	tab_ants = init_tab_ants(nb);
+// 	ants = 0;
+// 	room = ft_strnew(m->len);
+// 	while (ants <= m->ants)
+// 	{
+// 		while (j <= nb)
+// 		{
+// 			printf("L%d-", tab_ants[j]);
+// 			printf("%s ", read_ants(room, soluc[j], turn));
+// 		}
+// 	}
+// 	ft_strdel(&room);
+// }
