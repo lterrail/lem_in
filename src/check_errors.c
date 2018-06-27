@@ -6,7 +6,7 @@
 /*   By: lucien <lucien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/21 14:21:18 by lucien            #+#    #+#             */
-/*   Updated: 2018/06/23 12:06:28 by lucien           ###   ########.fr       */
+/*   Updated: 2018/06/27 17:37:15 by lterrail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void		check_double(t_map *m, char *s2)
 
 	tmp = ft_strnew(BUFF_SIZE);
 	tmp2 = ft_strnew(BUFF_SIZE);
-	tmp = ft_strcpy_char(tmp, s2, 'L', '-');
-	tmp2 = ft_strcpy_char(tmp2, s2, '-', '\n');
+	tmp = ft_strcpy_char(tmp, s2, '-');
+	tmp2 = ft_strcpy_to_until(tmp2, s2, '-', '\n');
 	if (ft_strcmp(tmp, tmp2) == 0)
 		exit_func(m, DOUBLE_ERROR);
 	ft_strdel(&tmp);

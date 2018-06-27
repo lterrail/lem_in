@@ -6,13 +6,14 @@
 /*   By: lterrail <lterrail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 16:47:48 by lterrail          #+#    #+#             */
-/*   Updated: 2018/04/11 19:22:27 by lterrail         ###   ########.fr       */
+/*   Updated: 2018/06/27 18:24:20 by lterrail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include "get_next_line.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
@@ -73,6 +74,14 @@ void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 int					ft_nbrlen(int n);
 void				ft_putnbr_base(int nbr, char *base);
+size_t				ft_strlen_char(char *str, char c);
+char				*ft_strdup_char(const char *str, char c);
+char				*ft_strcpy_char(char *dest, const char *src, char c);
+char				*ft_strcpy_to_until(char *dest, char *src, char c, char d);
+char				*ft_strcat_char(char *dest, char *src, char c);
+int					ft_count_char(char *str, char c);
+char				**ft_buble_sort_tab(char **tab, int nb);
+
 
 typedef struct		s_list
 {

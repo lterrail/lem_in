@@ -6,7 +6,7 @@
 /*   By: lterrail <lterrail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 16:38:13 by lterrail          #+#    #+#             */
-/*   Updated: 2018/06/24 21:40:24 by lucien           ###   ########.fr       */
+/*   Updated: 2018/04/11 17:44:45 by lterrail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ char		*ft_strtrim(const char *s)
 	while (size >= 0 &&
 			(s[i + size] == ' ' || s[i + size] == '\t' || s[i + size] == '\n'))
 		size--;
-	size++;
-	if (!(new = malloc(size + 1)))
+	if (!(new = malloc(++size + 1)))
 		return (NULL);
 	n = -1;
 	while (++n < size)

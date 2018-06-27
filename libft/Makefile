@@ -6,7 +6,7 @@
 #    By: lterrail <lterrail@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/05 16:05:37 by lterrail          #+#    #+#              #
-#    Updated: 2018/04/12 11:53:26 by lterrail         ###   ########.fr        #
+#    Updated: 2018/06/27 18:24:59 by lterrail         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,14 @@ ft_lstadd.c			\
 ft_lstiter.c		\
 ft_lstmap.c			\
 ft_nbrlen.c			\
+get_next_line.c		\
+ft_strcpy_char.c	\
+ft_strdup_char.c	\
+ft_strlen_char.c	\
+ft_strcat_char.c	\
+ft_count_char.c		\
+ft_strcpy_to_until.c\
+ft_buble_sort_tab.c	\
 ft_putnbr_base.c
 
 OBJ = $(SRC:.c=.o)

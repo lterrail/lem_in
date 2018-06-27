@@ -6,7 +6,7 @@
 /*   By: lterrail <lterrail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 14:33:17 by lterrail          #+#    #+#             */
-/*   Updated: 2018/06/24 23:02:56 by lucien           ###   ########.fr       */
+/*   Updated: 2018/06/27 18:42:38 by lterrail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static t_map	*map_init(void)
 void			print_data(t_map *m)
 {
 	printf("\n---------------------------------\n\n");
-	printf("final solution = \n%s\n", m->soluc);
+	printf("all solutions = \n%s\n", m->soluc);
 	printf("ants           = %d\n", m->ants);
 	printf("start          = %s\n", m->start);
 	printf("tmp start      = %s\n", m->next_room);
@@ -49,7 +49,7 @@ int				main(void)
 	if (read_map(m) != 4)
 		exit_func(m, READ_MAP_ERROR);
 	check_start_end(m);
-	process_parsing(m);
+	process_find_paths(m);
 	print_data(m);
 	process_ants(m);
 	exit_func(m, 0);
