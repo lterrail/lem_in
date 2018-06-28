@@ -6,7 +6,7 @@
 /*   By: lterrail <lterrail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 14:29:36 by lterrail          #+#    #+#             */
-/*   Updated: 2018/06/27 19:12:48 by lterrail         ###   ########.fr       */
+/*   Updated: 2018/06/28 17:29:20 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 
-#define BUFF_SIZE 32
 #define ANTS_ERROR 10
 #define READ_MAP_ERROR 11
 #define LINKS_ERROR 12
@@ -39,6 +38,7 @@ typedef struct		s_map
 	int				len;
 	int				loop;
 	char			*start;
+	char			*room;
 	char			*next_room;
 	char			*end;
 	char			*soluc;
@@ -98,7 +98,7 @@ void				remove_soluc(t_map *m, char *n_soluc, char *room);
 int					remove_last_room(t_map *m);
 void				remove_last_solution(t_map *m);
 
-int					ft_int_strstr(char *big, char *little);
+int					ft_istrstr(char *big, char *little);
 char				*ft_strstr_char(char *big, char *little);
 
 void				print_data(t_map *m);

@@ -6,7 +6,7 @@
 /*   By: lucien <lucien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/21 14:21:18 by lucien            #+#    #+#             */
-/*   Updated: 2018/06/27 17:37:15 by lterrail         ###   ########.fr       */
+/*   Updated: 2018/06/28 16:12:24 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 void		check_start_end(t_map *m)
 {
-	if (!(ft_strstr_char(m->links, m->end)))
+	if (ft_istrstr(m->links, m->end) < 0)
 		exit_func(m, NO_END_ROOM);
-
-	if (!(ft_strstr_char(m->links, m->start)))
+	if (ft_istrstr(m->links, m->start) < 0)
 		exit_func(m, NO_START_ROOM);
 }
 

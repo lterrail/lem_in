@@ -6,7 +6,7 @@
 /*   By: lterrail <lterrail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 14:33:17 by lterrail          #+#    #+#             */
-/*   Updated: 2018/06/27 18:42:38 by lterrail         ###   ########.fr       */
+/*   Updated: 2018/06/28 16:13:02 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int				main(void)
 	check_start_end(m);
 	process_find_paths(m);
 	print_data(m);
-	process_ants(m);
+	//process_ants(m);
 	exit_func(m, 0);
 	return (0);
 }

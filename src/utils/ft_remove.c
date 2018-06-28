@@ -6,7 +6,7 @@
 /*   By: lterrail <lterrail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:45:19 by lterrail          #+#    #+#             */
-/*   Updated: 2018/06/27 18:00:40 by lterrail         ###   ########.fr       */
+/*   Updated: 2018/06/28 12:30:35 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		remove_soluc(t_map *m, char *n_soluc, char *room)
 	int		i_next;
 	int		len;
 
-	i_start = ft_int_strstr(n_soluc, room);
+	i_start = ft_istrstr(n_soluc, room);
 	while (i_start > 0 && m->soluc[i_start] != '\n')
 		i_start--;
 	if (i_start != 0)

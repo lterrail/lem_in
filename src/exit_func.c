@@ -6,7 +6,7 @@
 /*   By: lucien <lucien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/18 22:32:18 by lucien            #+#    #+#             */
-/*   Updated: 2018/06/24 21:52:21 by lucien           ###   ########.fr       */
+/*   Updated: 2018/06/28 12:10:19 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void		exit_func(t_map *m, int error)
 	ft_strdel(&m->soluc);
 	ft_strdel(&m->next_room);
 	ft_strdel(&m->last_soluc);
+	ft_strdel(&m->room);
 	free(m);
 	if (error)
 		ft_putstr_fd("ERROR\n", 2);

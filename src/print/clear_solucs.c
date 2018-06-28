@@ -6,7 +6,7 @@
 /*   By: lucien <lucien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/24 12:04:34 by lucien            #+#    #+#             */
-/*   Updated: 2018/06/27 19:39:46 by lterrail         ###   ########.fr       */
+/*   Updated: 2018/06/28 12:29:44 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		remove_useless_path(t_map *m, char **soluc, int len_tab)
 		{
 			while (read_room(m, room, soluc[j]) != NULL)
 			{
-				if (ft_int_strstr(soluc[i], room) && ft_strlen(soluc[j]) >= ft_strlen(soluc[i]))
+				if (ft_istrstr(soluc[i], room) && ft_strlen(soluc[j]) >= ft_strlen(soluc[i]))
 				{
 					ft_strcpy(tmp, soluc[j]);
 					ft_strcpy(soluc[j], soluc[len_tab - 1]);
@@ -68,7 +68,7 @@ int		remove_useless_path(t_map *m, char **soluc, int len_tab)
 					supr--;
 					break ;
 				}
-				else if (ft_int_strstr(soluc[i], room) && ft_strlen(soluc[j]) < ft_strlen(soluc[i]))
+				else if (ft_istrstr(soluc[i], room) && ft_strlen(soluc[j]) < ft_strlen(soluc[i]))
 				{
 					ft_strcpy(tmp, soluc[i]);
 					ft_strcpy(soluc[i], soluc[len_tab - 1]);

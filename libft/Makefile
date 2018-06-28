@@ -6,7 +6,7 @@
 #    By: lterrail <lterrail@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/05 16:05:37 by lterrail          #+#    #+#              #
-#    Updated: 2018/06/27 18:24:59 by lterrail         ###   ########.fr        #
+#    Updated: 2018/06/28 15:18:22 by lucien           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,6 +79,7 @@ ft_strcat_char.c	\
 ft_count_char.c		\
 ft_strcpy_to_until.c\
 ft_buble_sort_tab.c	\
+ft_count_char_i.c	\
 ft_putnbr_base.c
 
 OBJ = $(SRC:.c=.o)

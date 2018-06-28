@@ -6,20 +6,20 @@
 /*   By: lucien <lucien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/21 19:52:42 by lucien            #+#    #+#             */
-/*   Updated: 2018/06/27 16:30:40 by lterrail         ###   ########.fr       */
+/*   Updated: 2018/06/28 12:29:38 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static void	cpy_soluc_tmp(t_map *m, char *tmp) //copie le last_solution dans solution jusqu'à là où 'lon veut'
+static void	cpy_soluc_tmp(t_map *m) //copie le last_solution dans solution jusqu'à là où 'lon veut'
 {
 	int		i;
 	int		n;
 
 	i = 0;
-	n = ft_int_strstr(m->last_soluc, tmp) + ft_strlen(tmp);
-	if (n - ft_strlen(tmp) == 0)
+	n = ft_istrstr(m->last_soluc, m->room) + ft_strlen(m->room);
+	if (n - ft_strlen(m->room) == 0)
 		add_room_in_soluc(m, m->soluc, m->start);
 	else
 	{
@@ -42,14 +42,14 @@ static void	read_soluc(t_map *m, char *s2, int i)
 	ft_strcpy_char(m->last_soluc, &s2[i], '\n');
 }
 
-static char	*get_next_room(t_map *m, char *tmp) //change la room pour la suivante
+static char	*get_next_room(t_map *m) //change la room pour la suivante
 {
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 0;
-	i = ft_int_strstr(m->last_soluc, tmp) + ft_strlen(tmp) + 1;
+	i = ft_istrstr(m->last_soluc, m->room) + ft_strlen(m->room) + 1;
 	while (m->last_soluc[i] != '-')
 	{
 		if (m->last_soluc[i] == '\0') //si on a parcouru tout last_solu sans trouver de lien entre target et soluc alors tu vas à la soluc d'avant
@@ -59,22 +59,20 @@ static char	*get_next_room(t_map *m, char *tmp) //change la room pour la suivant
 			i = 0;
 			j = 0;
 		}
-		tmp[j] = m->last_soluc[i];
+		m->room[j] = m->last_soluc[i];
 		j++;
 		i++;
 	}
-	tmp[j] = '\0';
-	return (tmp);
+	m->room[j] = '\0';
+	return (m->room);
 }
 
 void		next_solution(t_map *m)
 {
-	char	*tmp;
 	int		check;
 
 	check = 0;
-	tmp = ft_strnew(m->len);
-	tmp = ft_strcpy(tmp, m->start);
+	m->room = ft_strcpy(m->room, m->start);
 	if (!(ft_strstr(m->links, m->start)) && (ft_strlen(m->last_soluc) -
 	(ft_strlen(m->start) + ft_strlen(m->end) + 1) == 0))
 	{
@@ -83,14 +81,13 @@ void		next_solution(t_map *m)
 	}
 	while (check != 1)
 	{
-		if (ft_strstr_char(m->links, tmp))
+		if (ft_strstr_char(m->links, m->room))
 		{
-			cpy_soluc_tmp(m, tmp);
-			ft_strcpy(m->next_room, tmp);
+			cpy_soluc_tmp(m);
+			ft_strcpy(m->next_room, m->room);
 			check = 1;
 		}
 		else
-			tmp = get_next_room(m, tmp);
+			m->room = get_next_room(m);
 	}
-	ft_strdel(&tmp);
 }

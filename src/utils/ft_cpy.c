@@ -6,7 +6,7 @@
 /*   By: lucien <lucien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/23 17:53:15 by lucien            #+#    #+#             */
-/*   Updated: 2018/06/27 17:51:27 by lterrail         ###   ########.fr       */
+/*   Updated: 2018/06/28 13:21:56 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,17 @@ char		*cpy_soluc(t_map *m, int nb)
 	int		i;
 	char	*tmp;
 
-	tmp = ft_strnew(m->len);
+	i = m->i - 2;
 	if (nb == -1)
-		return (cpy_last_soluc_room(m, tmp, m->soluc, '\n'));
+	{
+		while (i > 0 && m->soluc[i] != '\n')
+			i--;
+		if (i != 0)
+			i += 1;
+		return (&m->soluc[i]);
+	}
 	i = 0;
+	tmp = ft_strnew(m->len);
 	while (nb != 0)
 	{
 		while (m->soluc[i] != '\n')

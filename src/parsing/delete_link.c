@@ -6,7 +6,7 @@
 /*   By: lucien <lucien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 14:15:56 by lucien            #+#    #+#             */
-/*   Updated: 2018/06/27 17:43:26 by lterrail         ###   ########.fr       */
+/*   Updated: 2018/06/28 12:29:35 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		delete_link(t_map *m, char *room)
 
 	len = ft_strlen_char(room, '-');
 	room[len] = '\0';
-	i_clear = ft_int_strstr(m->links, room);
+	i_clear = ft_istrstr(m->links, room);
 	if (m->loop == 0)
 		cpy_room(m->next_room, ft_strstr_char(m->links, m->next_room));
 	i_next = i_clear;

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucien <lucien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 00:15:22 by lucien            #+#    #+#             */
-/*   Updated: 2018/06/27 17:35:56 by lterrail         ###   ########.fr       */
+/*   Updated: 2018/06/28 16:35:39 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int			ft_int_strstr(char *big, char *little)
+int			ft_istrstr(char *big, char *little)
 {
 	int		i;
 	int		j;
@@ -39,7 +39,7 @@ int			ft_int_strstr(char *big, char *little)
 		}
 		i++;
 	}
-	return (0);
+	return (-1);
 }
 
 char	*ft_strstr_char(char *big, char *little)

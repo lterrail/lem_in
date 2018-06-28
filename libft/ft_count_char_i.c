@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy_char.c                                   :+:      :+:    :+:   */
+/*   ft_count_char_i.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lterrail <lterrail@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lucien <lucien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/27 16:17:42 by lterrail          #+#    #+#             */
-/*   Updated: 2018/06/28 14:26:28 by lucien           ###   ########.fr       */
+/*   Created: 2018/06/28 15:17:13 by lucien            #+#    #+#             */
+/*   Updated: 2018/06/28 15:29:42 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strcpy_char(char *dest, const char *src, char c)
+int		ft_count_char_i(char *str, char c, int len)
 {
-	int i;
+	int		i;
+	int		nb;
 
+	nb = 0;
 	i = 0;
-	while (src[i] && src[i] != c)
+	while (str[i] && i <= len)
 	{
-		dest[i] = src[i];
+		if (str[i] == c)
+			nb++;
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	return (nb);
 }

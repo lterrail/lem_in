@@ -6,7 +6,7 @@
 /*   By: lterrail <lterrail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:46:25 by lterrail          #+#    #+#             */
-/*   Updated: 2018/06/27 17:46:53 by lterrail         ###   ########.fr       */
+/*   Updated: 2018/06/28 12:30:33 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		add_end_soluc(t_map *m, char *n_soluc, char *room)
 {
 	int		i;
 
-	i = ft_int_strstr(n_soluc, room);
+	i = ft_istrstr(n_soluc, room);
 	while (n_soluc[i] != '-')
 		i++;
 	i++;
