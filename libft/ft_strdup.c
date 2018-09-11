@@ -6,7 +6,7 @@
 /*   By: lterrail <lterrail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 16:29:42 by lterrail          #+#    #+#             */
-/*   Updated: 2018/04/11 17:13:42 by lterrail         ###   ########.fr       */
+/*   Updated: 2018/06/28 16:40:12 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strdup(const char *str)
 	j = 0;
 	while (str[i_str])
 		i_str++;
-	if (!(cpy = malloc(sizeof(char) * i_str + 1)))
+	if (!(cpy = malloc(sizeof(char) * i_str)))
 		return (0);
 	while (str[j])
 	{

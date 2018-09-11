@@ -6,7 +6,7 @@
 /*   By: lterrail <lterrail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 17:17:26 by lterrail          #+#    #+#             */
-/*   Updated: 2018/06/28 18:21:49 by lucien           ###   ########.fr       */
+/*   Updated: 2018/06/28 19:23:27 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int				get_next_line(const int fd, char **line)
 
 	ret = 1;
 	tmp = NULL;
-	if (!line || fd < 0)
+	if (!line || fd < 0 || (str[0] == '\0' && (!(str = ft_strnew(BUFF_SIZE)))))
 		return (-1);
 	while (ret > 0)
 	{
@@ -57,6 +57,7 @@ int				get_next_line(const int fd, char **line)
 		if (!(str = read_line(fd, str, &ret)))
 			return (-1);
 	}
+	ft_strdel(&tmp);
 	if (ret == 0 && str && ft_strlen(str))
 		return (last_line(&(*line), str));
 	return (ret);

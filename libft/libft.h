@@ -6,7 +6,7 @@
 /*   By: lterrail <lterrail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 16:47:48 by lterrail          #+#    #+#             */
-/*   Updated: 2018/06/28 18:10:17 by lucien           ###   ########.fr       */
+/*   Updated: 2018/08/07 15:47:32 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int					ft_strequ(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2, size_t n);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
-char				*ft_strjoin(const char *s1, const char *s2);
+char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_itoa(int n);
@@ -74,15 +74,7 @@ void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 int					ft_nbrlen(int n);
 void				ft_putnbr_base(int nbr, char *base);
-size_t				ft_strlen_char(char *str, char c);
-char				*ft_strdup_char(const char *str, char c);
-char				*ft_strcpy_char(char *dest, const char *src, char c);
-char				*ft_strcpy_to_until(char *dest, char *src, char c, char d);
-char				*ft_strcat_char(char *dest, char *src, char c);
-int					ft_count_char(char *str, char c);
-char				**ft_buble_sort_tab(char **tab, int nb);
-int					ft_count_char_i(char *str, char c, int len);
-
+char				*ft_strndup(const char *str, int len);
 
 typedef struct		s_list
 {

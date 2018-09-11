@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_count_char_i.c                                  :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucien <lucien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/28 15:17:13 by lucien            #+#    #+#             */
-/*   Updated: 2018/06/28 15:29:42 by lucien           ###   ########.fr       */
+/*   Created: 2018/08/07 15:36:32 by lucien            #+#    #+#             */
+/*   Updated: 2018/08/07 16:46:04 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_count_char_i(char *str, char c, int len)
+char	*ft_strndup(const char *str, int n)
 {
-	int		i;
-	int		nb;
+	char	*ptr;
 
-	nb = 0;
-	i = 0;
-	while (str[i] && i <= len)
+	ptr = NULL;
+	if (str != NULL)
 	{
-		if (str[i] == c)
-			nb++;
-		i++;
+		ptr = ft_strnew(n + 1);
+		if (ptr == NULL)
+			return (NULL);
+		ft_strncpy(ptr, str, n);
+		ptr[n] = '\0';
 	}
-	return (nb);
+	return (ptr);
 }

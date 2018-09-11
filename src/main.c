@@ -6,52 +6,63 @@
 /*   By: lterrail <lterrail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 14:33:17 by lterrail          #+#    #+#             */
-/*   Updated: 2018/06/28 16:13:02 by lucien           ###   ########.fr       */
+/*   Updated: 2018/08/07 16:37:02 by lucien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static t_map	*map_init(void)
+static void		lem_in_init(t_map *m, char *line)
 {
-	t_map	*m;
-
-	m = NULL;
-	if (!(m = malloc(sizeof(t_map))))
-		return  (NULL);
-	m->ants = 0;
-	m->i = 0;
-	m->loop = 0;
-	m->len = 0;
-	m->count = 0;
+	free(line);
+	m->ants_in = 0;
+	m->ants_out = 0;
+	m->instruction = 0;
+	m->rooms = NULL;
 	m->links = NULL;
 	m->start = NULL;
 	m->end = NULL;
-	return (m);
 }
 
-void			print_data(t_map *m)
+static int		get_token(char *line)
 {
-	printf("\n---------------------------------\n\n");
-	printf("all solutions = \n%s\n", m->soluc);
-	printf("ants           = %d\n", m->ants);
-	printf("start          = %s\n", m->start);
-	printf("tmp start      = %s\n", m->next_room);
-	printf("end            = %s\n", m->end);
-	printf("count          = %d\n", m->count);
+	int		i;
+
+	i = 0;
+	if (line[0] == '#' && line[1] == '#')
+		return (INSTRUCTION);
+	if (line[0] == '#')
+		return (COMMENTARY);
+	while (line[i])
+	{
+		if (line[i] == '-')
+			return (LINK);
+		line++;
+	}
+	return (ROOM);
 }
 
 int				main(void)
 {
-	t_map	*m;
+	t_map	m;
+	char	*line;
+	int		token;
 
-	m = map_init();
-	if (read_map(m) != 4)
-		exit_func(m, READ_MAP_ERROR);
-	check_start_end(m);
-	process_find_paths(m);
-	print_data(m);
-	//process_ants(m);
-	exit_func(m, 0);
+	if (get_next_line(0, &line) <= 0 || parse_nbr(&m, &line) == ANTS_ERROR)
+		return (ANTS_ERROR);
+	lem_in_init(&m, line);
+	while (get_next_line(0, &line) > 0)
+	{
+		token = get_token(line);
+		if (token == INSTRUCTION)
+			parse_intruction(&m, line);
+		else if (token == COMMENTARY)
+			parse_commentary(&m, line);
+		else if (parse_room(&m, line) == PARSE_ROOM_ERROR &&
+				parse_links(&m, line, 0) == PARSE_LINKS_ERROR)
+			break ;
+		free(line);
+	}
+	printf("test\n");
 	return (0);
 }

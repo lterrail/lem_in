@@ -6,13 +6,13 @@
 /*   By: lterrail <lterrail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 16:31:56 by lterrail          #+#    #+#             */
-/*   Updated: 2018/06/28 18:12:23 by lucien           ###   ########.fr       */
+/*   Updated: 2018/04/11 17:29:56 by lterrail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(const char *s1, const char *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*str;
 	int		i_s1;
