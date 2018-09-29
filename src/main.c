@@ -3,66 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lterrail <lterrail@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmazeaud <lmazeaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 14:33:17 by lterrail          #+#    #+#             */
-/*   Updated: 2018/08/07 16:37:02 by lucien           ###   ########.fr       */
+/*   Updated: 2018/09/26 16:34:46 by lmazeaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static void		lem_in_init(t_map *m, char *line)
+static t_map	*lem_in_init(void)
 {
-	free(line);
-	m->ants_in = 0;
-	m->ants_out = 0;
-	m->instruction = 0;
+	t_map *m;
+
+	if (!(m = (t_map *)malloc(sizeof(t_map))))
+		return (NULL);
 	m->rooms = NULL;
-	m->links = NULL;
 	m->start = NULL;
 	m->end = NULL;
-}
-
-static int		get_token(char *line)
-{
-	int		i;
-
-	i = 0;
-	if (line[0] == '#' && line[1] == '#')
-		return (INSTRUCTION);
-	if (line[0] == '#')
-		return (COMMENTARY);
-	while (line[i])
-	{
-		if (line[i] == '-')
-			return (LINK);
-		line++;
-	}
-	return (ROOM);
+	m->link = 0;
+	m->is_map = 0;
+	m->ant_in = 0;
+	m->ant_out = 0;
+	m->ant_per_turn = 0;
+	m->max_ant_per_turn = 0;
+	m->instruction = 0;
+	return (m);
 }
 
 int				main(void)
 {
-	t_map	m;
-	char	*line;
-	int		token;
+	t_map	*m;
 
-	if (get_next_line(0, &line) <= 0 || parse_nbr(&m, &line) == ANTS_ERROR)
-		return (ANTS_ERROR);
-	lem_in_init(&m, line);
-	while (get_next_line(0, &line) > 0)
+	m = lem_in_init();
+	if (init_parsing(m, 0, NB_LINK_ERROR) == 1)
 	{
-		token = get_token(line);
-		if (token == INSTRUCTION)
-			parse_intruction(&m, line);
-		else if (token == COMMENTARY)
-			parse_commentary(&m, line);
-		else if (parse_room(&m, line) == PARSE_ROOM_ERROR &&
-				parse_links(&m, line, 0) == PARSE_LINKS_ERROR)
-			break ;
-		free(line);
+		find_distance(m->end, 0, m->start->name, m->end->name);
+		if (m->start->distance == -1)
+			ft_putstr_fd("\e[91mError: \e[38;5;208mNo Solution\n\e[39m", 2);
+		else
+		{
+			m->start->occuped = 1;
+			ft_printf("%s\n", m->std);
+			init_print_ants(m);
+			free_ants(m->ants);
+		}
+		free_all(m);
 	}
-	printf("test\n");
+	else
+	{
+		ft_putstr_fd("\e[91mError: \e[38;5;208mInvalid Map or Ants\n\e[39m", 2);
+		free_all(m);
+	}
 	return (0);
 }
